@@ -2,6 +2,7 @@
 filegroup(
     name = "gradle",
     srcs = ["gradlew"],
+    visibility = ["//visibility:public"]
 )
 
 filegroup(
@@ -28,6 +29,7 @@ genrule(
     outs = ["RunePageApiModel.jar"],
     message = "Generating Jar file and projections from Smithy Model",
     tools = [":gradle"] + [":gradle_config"] + [":smithy_config"],
+    visibility = ["//visibility:public"]
 )
 
 genrule(
@@ -40,6 +42,7 @@ genrule(
     outs = ["RecommenderService.openapi.json"],
     message = "Generating Jar file and projections from Smithy Model",
     tools = [":gradle"] + [":gradle_config"] + [":smithy_config"],
+    visibility = ["//visibility:public"]
 )
 
 genrule(
@@ -48,7 +51,8 @@ genrule(
     cmd="""
     wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.1/openapi-generator-cli-5.0.1.jar -O $@
     """,
-    outs=["openapi-generator-cli.jar"]
+    outs=["openapi-generator-cli.jar"],
+    visibility = ["//visibility:public"]
 )
 
 
@@ -62,6 +66,7 @@ genrule(
     """,
     outs = ["go_client"],
     message = "Building Javascript Client",
-    srcs = [":codegen_cli", ":smithy_gen-openapi"] 
+    srcs = [":codegen_cli", ":smithy_gen-openapi"],
+    visibility = ["//visibility:public"]
 )
 
