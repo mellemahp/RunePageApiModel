@@ -44,20 +44,33 @@ genrule(
 )
 
 genrule(
-    name = "smithy-model-java",
+    name = "smithy-model-java-full",
     cmd = """
     java -jar $(location codegen_cli) generate \
         -i $(location smithy_gen-openapi) \
         -g java \
+        --api-package com.hmellema.league.api \
+        --artifact-id models \
+        --model-package com.hmellema.league.model \
         -o java-model-build-files && \
     ./$(location gradle) -p java-model-build-files build &&
-    cp java-model-build-files/build/libs/openapi-java-client-2006-03-01.jar $@
+    cp java-model-build-files/build/libs/models-2006-03-01.jar $@
     """,
     outs = ["runePageModel.jar"],
     message = "Generating files for building Java library",
     srcs = [":codegen_cli", ":smithy_gen-openapi"],
     tools = [":gradle"],
     visibility = ["//visibility:public"]
+)
+
+genrule(
+    name = "smithy-model-java-slim",
+    cmd = """
+    unzip $(location smithy-model-java-full) && \
+    jar cf $@ com/hmellema/league/model/* 
+    """,
+    srcs = [":smithy-model-java-full"],
+    outs = ["runePageModelSlim.jar"]
 )
 
 genrule(

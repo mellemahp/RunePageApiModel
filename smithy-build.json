@@ -3,7 +3,8 @@
     "plugins": {
         "openapi": {
             "service": "league.recommender#RecommenderService",
-            "useJsonName": true
+            "useJsonName": true,
+            "keepUnusedComponents": true
         }
     }
 }
