@@ -44,7 +44,7 @@ genrule(
 )
 
 genrule(
-    name = "model-java",
+    name = "smithy-model-java",
     cmd = """
     java -jar $(location codegen_cli) generate \
         -i $(location smithy_gen-openapi) \
@@ -57,20 +57,6 @@ genrule(
     message = "Generating files for building Java library",
     srcs = [":codegen_cli", ":smithy_gen-openapi"],
     tools = [":gradle"],
-    visibility = ["//visibility:public"]
-)
-
-genrule(
-    name = "model-java",
-    cmd = """
-    $(location model-build-files-java)/gradlew \
-        -p $$(dirname ./$(location model-build-files-java)) \
-        --settings-file settings.gradle \
-        build 
-    """,
-    outs = ["runePageModel2.jar"],
-    message = "Generating Java library",
-    srcs = [":gradle", ":model-build-files-java"],
     visibility = ["//visibility:public"]
 )
 
