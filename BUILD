@@ -44,7 +44,7 @@ genrule(
 )
 
 genrule(
-    name = "model-build-files-java",
+    name = "model-java",
     cmd = """
     java -jar $(location codegen_cli) generate \
         -i $(location smithy_gen-openapi) \
