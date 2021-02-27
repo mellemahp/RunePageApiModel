@@ -21,19 +21,6 @@ filegroup(
 )
 
 genrule(
-    name = "smithy_gen-jar",
-    srcs = [],
-    cmd = """
-     ./$(location gradle) -p $$(dirname ./$(location gradle)) build && 
-     cp -R $$(dirname ./$(location gradle))/build/libs/RunePageApiModel.jar $(@D)
-    """,
-    outs = ["RunePageApiModel.jar"],
-    message = "Generating Jar file and projections from Smithy Model",
-    tools = [":gradle"] + [":gradle_config"] + [":smithy_config"],
-    visibility = ["//visibility:public"]
-)
-
-genrule(
     name = "smithy_gen-openapi",
     srcs = [],
     cmd = """
@@ -56,6 +43,36 @@ genrule(
     visibility = ["//visibility:public"]
 )
 
+genrule(
+    name = "model-build-files-java",
+    cmd = """
+    java -jar $(location codegen_cli) generate \
+        -i $(location smithy_gen-openapi) \
+        -g java \
+        -o java-model-build-files && \
+    ./$(location gradle) -p java-model-build-files build &&
+    cp java-model-build-files/build/libs/openapi-java-client-2006-03-01.jar $@
+    """,
+    outs = ["runePageModel.jar"],
+    message = "Generating files for building Java library",
+    srcs = [":codegen_cli", ":smithy_gen-openapi"],
+    tools = [":gradle"],
+    visibility = ["//visibility:public"]
+)
+
+genrule(
+    name = "model-java",
+    cmd = """
+    $(location model-build-files-java)/gradlew \
+        -p $$(dirname ./$(location model-build-files-java)) \
+        --settings-file settings.gradle \
+        build 
+    """,
+    outs = ["runePageModel2.jar"],
+    message = "Generating Java library",
+    srcs = [":gradle", ":model-build-files-java"],
+    visibility = ["//visibility:public"]
+)
 
 genrule(
     name = "generate_client-javascript",
