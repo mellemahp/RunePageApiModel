@@ -6,7 +6,7 @@ use league.common#NoSuchChampion
 /// An item set recommendation for a champion
 resource ItemSet {
     identifiers: { 
-        championName: String
+        championName: ChampionName
     },
     read: GetItemSet,
 }
@@ -26,7 +26,7 @@ operation GetItemSet {
 structure GetItemSetInput {
     @required
     @httpLabel
-    championName: String
+    championName: ChampionName
 }
 
 structure GetItemSetOutput {

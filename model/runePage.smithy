@@ -6,7 +6,7 @@ use league.common#NoSuchChampion
 /// A rune page suggestion for a champion
 resource RunePage {
     identifiers: { 
-        championName: String
+        championName: ChampionName
     },
     read: GetRunePage,
 }
@@ -26,7 +26,7 @@ operation GetRunePage {
 structure GetRunePageInput {
     @required
     @httpLabel
-    championName: String
+    championName: ChampionName
 }
 
 structure GetRunePageOutput {
