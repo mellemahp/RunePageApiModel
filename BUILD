@@ -20,6 +20,12 @@ filegroup(
     visibility = ["//visibility:public"]
 )
 
+filegroup(
+    name = "model-build-config", 
+    srcs = ["model-gen.json"],
+    visibility = ["//visibility:public"]
+)
+
 genrule(
     name = "smithy_gen-openapi",
     srcs = [],
@@ -49,16 +55,14 @@ genrule(
     java -jar $(location codegen_cli) generate \
         -i $(location smithy_gen-openapi) \
         -g java \
-        --api-package com.hmellema.league.api \
-        --artifact-id models \
-        --model-package com.hmellema.league.model \
+        -c $(location model-build-config) \
         -o java-model-build-files && \
     ./$(location gradle) -p java-model-build-files build &&
     cp java-model-build-files/build/libs/models-2006-03-01.jar $@
     """,
     outs = ["runePageModel.jar"],
     message = "Generating files for building Java library",
-    srcs = [":codegen_cli", ":smithy_gen-openapi"],
+    srcs = [":codegen_cli", ":smithy_gen-openapi", ":model-build-config"],
     tools = [":gradle"],
     visibility = ["//visibility:public"]
 )
