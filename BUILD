@@ -51,7 +51,6 @@ genrule(
         -g java \
         --api-package com.hmellema.league.api \
         --artifact-id models \
-        --library retrofit2 \
         --model-package com.hmellema.league.model \
         -o java-model-build-files && \
     ./$(location gradle) -p java-model-build-files build &&
