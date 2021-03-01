@@ -39,7 +39,7 @@ structure GetRunePageOutput {
     runes: RuneList,
 
     @required
-    juliOmeter: Number
+    juliOmeter: Integer
 }
 
 list RuneList {
