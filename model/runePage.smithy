@@ -36,7 +36,10 @@ structure GetRunePageOutput {
     name: String,
 
     @required
-    runes: RuneList
+    runes: RuneList,
+
+    @required
+    juliOmeter: Number
 }
 
 list RuneList {
