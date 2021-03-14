@@ -16,7 +16,7 @@ resource ItemSet {
 @readonly
 @integration(
     type: "aws_proxy",
-    uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:GetItemSetLambda/invocations",   
+    uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWS::StackName}-GetItemSetLambda/invocations",   
     httpMethod: "POST"
 )
 @http(

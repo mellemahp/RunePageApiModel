@@ -16,7 +16,7 @@ resource RunePage {
 @readonly
 @integration(
     type: "aws_proxy",
-    uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:GetRunePageLambda/invocations",
+    uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWS::StackName}-GetRunePageLambda/invocations",
     httpMethod: "POST"
 )
 @http(
