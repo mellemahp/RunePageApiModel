@@ -5,6 +5,10 @@
             "service": "league.recommender#RecommenderService",
             "useJsonName": true,
             "keepUnusedComponents": true
+        },
+        "aws-apigateway-openapi": {
+            "name": "recommender-api",
+            "service": "league.recommender#RecommenderService"
         }
     }
 }

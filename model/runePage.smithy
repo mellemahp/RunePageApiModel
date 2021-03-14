@@ -2,6 +2,7 @@ namespace league.runePage
 
 use league.common#ChampionName
 use league.common#NoSuchChampion
+use aws.apigateway#integration
 
 /// A rune page suggestion for a champion
 resource RunePage {
@@ -13,6 +14,11 @@ resource RunePage {
 
 /// Get A rune page for a champion 
 @readonly
+@integration(
+    type: "aws_proxy",
+    uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:GetRunePageLambda/invocations",
+    httpMethod: "POST"
+)
 @http(
     method: "GET", 
     uri: "/runePage/{championName}"

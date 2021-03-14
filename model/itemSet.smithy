@@ -2,6 +2,7 @@ namespace league.itemSet
 
 use league.common#ChampionName
 use league.common#NoSuchChampion
+use aws.apigateway#integration
 
 /// An item set recommendation for a champion
 resource ItemSet {
@@ -13,6 +14,11 @@ resource ItemSet {
 
 /// Get A rune page for a champion 
 @readonly
+@integration(
+    type: "aws_proxy",
+    uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:GetItemSetLambda/invocations",   
+    httpMethod: "POST"
+)
 @http(
     method: "GET", 
     uri: "/itemSet/{championName}"
