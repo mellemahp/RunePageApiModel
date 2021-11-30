@@ -20,7 +20,7 @@ openapi_tools_generator_bazel_repositories()
 #######################
 # Setup Smithy Rules
 #######################
-SMITHY_RULES_TAG = "0.1.0"
+SMITHY_RULES_TAG = "1.0.1"
 
 SMITHY_RULES_SHA = "af438b7815c89156696c4097619f1b94a49090f8ea93808eef4f1e06f8187f8c"
 
