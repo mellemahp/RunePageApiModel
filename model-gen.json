@@ -1,5 +1,0 @@
-{
-        "artifactId" : "models", 
-        "apiPackage" : "com.hmellema.league.api",
-        "modelPackage" : "com.hmellema.league.model"
-}

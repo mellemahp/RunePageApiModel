@@ -1,6 +1,5 @@
-#please build
-pleasew
-plz-out/
+# Ignore vs code 
+.vscode/
 
 # Eclipse
 .classpath
@@ -14,14 +13,6 @@ plz-out/
 
 # Mac
 .DS_Store
-
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Ignore Gradle build output directory
-build
-out/
-.gradle/
 
 # Ignore all bazel-* symlinks. There is no full list since this can change
 # based on the name of the directory bazel is cloned into.

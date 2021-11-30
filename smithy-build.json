@@ -1,14 +1,66 @@
 {
     "version": "1.0",
-    "plugins": {
-        "openapi": {
-            "service": "league.recommender#RecommenderService",
-            "useJsonName": true,
-            "keepUnusedComponents": true
-        },
-        "aws-apigateway-openapi": {
-            "name": "recommender-api",
-            "service": "league.recommender#RecommenderService"
+    "projections": {
+        "model": {
+            "plugins": {
+                "openapi": {
+                    "service": "league.recommender#RecommenderService",
+                    "useJsonName": true,
+                    "keepUnusedComponents": true
+                },
+                "aws-apigateway-openapi": {
+                    "name": "recommender-api",
+                    "service": "league.recommender#RecommenderService"
+                }
+            }
+        }, 
+        "sdk": {
+            "transforms": [
+                {
+                    "name": "excludeShapesByTag",
+                    "args": {
+                        "tags": ["internal", "beta"]
+                    }
+                },
+                {
+                    "name": "excludeShapesByTrait",
+                    "args": {
+                        "traits": ["internal"]
+                    }
+                }
+            ],
+            "plugins": {
+                "openapi": {
+                    "service": "league.recommender#RecommenderService",
+                    "useJsonName": true,
+                    "keepUnusedComponents": true
+                }
+            }
+        }, 
+        "docs": {
+            "transforms": [
+                {
+                    "name": "excludeShapesByTag",
+                    "args": {
+                        "tags": ["internal", "beta"]
+                    }
+                },
+                {
+                    "name": "excludeShapesByTrait",
+                    "args": {
+                        "traits": ["internal"]
+                    }
+                }
+            ],
+            "plugins": {
+                "openapi": {
+                    "service": "league.recommender#RecommenderService",
+                    "useJsonName": true,
+                    "keepUnusedComponents": false,
+                    "stripNamespaces": true
+                }
+            }
         }
     }
+    
 }
