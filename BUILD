@@ -24,7 +24,7 @@ smithy_java_models(
     name = "api_models",
     srcs = [":model_files"],
     config = "smithy-build.json",
-    model_namespace = "league",
+    model_namespace = "com.hmellema.league",
     projection = "model",
     service_name = SERVICE_NAME,
     deps = [
